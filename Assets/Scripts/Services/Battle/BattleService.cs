@@ -1,71 +1,51 @@
 ﻿using System.Collections.Generic;
-using Factories;
 using Factories.StateMachineBuilder.Impl;
 using Factories.StateMachineBuilderFactory;
-using Models;
 using Models.Units;
-using Settings.Battle;
-using Settings.Effects;
+using Supyrb;
+using UI.Core.Signals;
+using UI.Windows;
 
 namespace Services.Battle
 {
     public class BattleService
     {
-        private readonly BattleSettingsBase _battleSettingsBase;
-        private readonly EffectFactory _effectFactory;
         private readonly EnemyStateMachineBuilderFactory _enemyStateMachineBuilderFactory;
         private readonly PlayerStateMachineBuilder _playerStateMachineBuilder;
+        private readonly EffectHandler.EffectHandler _effectHandler;
         private int _currentBattleID;
 
         public BattleService(
-            BattleSettingsBase battleSettingsBase, 
-            EffectFactory effectFactory,
             EnemyStateMachineBuilderFactory enemyStateMachineBuilderFactory,
-            PlayerStateMachineBuilder playerStateMachineBuilder
+            PlayerStateMachineBuilder playerStateMachineBuilder,
+            EffectHandler.EffectHandler effectHandler
         )
         {
-            _battleSettingsBase = battleSettingsBase;
-            _effectFactory = effectFactory;
             _enemyStateMachineBuilderFactory = enemyStateMachineBuilderFactory;
             _playerStateMachineBuilder = playerStateMachineBuilder;
+            _effectHandler = effectHandler;
         }
         public Battle CurrentBattle { get; private set; }
     
-        public void StartNextBattle()
+        public void StartBattle(BattleUnit player, List<EnemyUnit> enemies)
         {
-            var player = new BattleUnit(new Dictionary<EffectType, UnitAttribute>());
-            var enemies = CreateEnemies();
-            
             CurrentBattle = new Battle(
                 _playerStateMachineBuilder, 
                 _enemyStateMachineBuilderFactory, 
                 player, 
                 enemies, 
-                _effectFactory);
+                _effectHandler);
             
             CurrentBattle.BattleCompleted += OnBattleCompleted;
             CurrentBattle.Begin();
+            Signals.Get<SignalOpenWindow>().Dispatch(typeof(BattleWindow));
         }
 
         private void OnBattleCompleted()
         {
             CurrentBattle.BattleCompleted -= OnBattleCompleted;
-        }
-
-        private List<EnemyUnit> CreateEnemies()
-        {
-            var enemies = new List<EnemyUnit>();
-
-            foreach (var enemySettings in _battleSettingsBase.BattleSettings.Enemies)
-            {
-                var enemy = new EnemyUnit(
-                    new Dictionary<EffectType, UnitAttribute>(), 
-                    enemySettings.Type);
-                
-                enemies.Add(enemy);
-            }
-
-            return enemies;
+            var wnd = typeof(BattleWinWindow);
+            Signals.Get<SignalOpenWindow>();
         }
     }
 }

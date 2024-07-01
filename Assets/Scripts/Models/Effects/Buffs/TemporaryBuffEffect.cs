@@ -1,21 +1,14 @@
-﻿using Models.Units;
-using Settings.Effects;
+﻿using Settings.Effects;
 
 namespace Models.Effects.Buffs
 {
     public class TemporaryBuffEffect : AttributeBuffEffect
     {
         private int _durationTurns;
-        
-        public TemporaryBuffEffect(BattleUnit target, 
-            ApplicationType applicationType, 
-            EffectSettings effectSettings,
-            int durationTurns
-        ) : base(target, applicationType, effectSettings)
-        {
-            _durationTurns = durationTurns;
-        }
 
+        public TemporaryBuffEffect(EffectSettings settings) : base(settings)
+        { }
+        
         public override void Tick()
         {
             _durationTurns--;

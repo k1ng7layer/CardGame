@@ -6,8 +6,8 @@ namespace Settings.Battle
     [CreateAssetMenu(menuName = "Settings/Battle/BattleSettings", fileName = "NewBattleSettings")]
     public class BattleSettings : ScriptableObject
     {
-        [SerializeField] private EnemySettings[] _enemies;
+        [SerializeField] private UnitSettings[] _enemies;
 
-        public EnemySettings[] Enemies => _enemies;
+        public UnitSettings[] Enemies => _enemies;
     }
 }

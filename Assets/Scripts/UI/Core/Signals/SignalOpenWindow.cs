@@ -3,13 +3,8 @@ using Supyrb;
 
 namespace UI.Core.Signals
 {
-    public class SignalOpenWindow : Signal<SignalOpenWindow>
+    public class SignalOpenWindow : Signal<Type>
     {
-        public readonly Type WindowType;
         
-        public SignalOpenWindow(Type viewType)
-        {
-            WindowType = viewType;
-        }
     }
 }

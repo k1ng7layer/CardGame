@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Factories;
 using Factories.StateMachineBuilder;
 using Factories.StateMachineBuilderFactory;
 using Models.Effects;
@@ -17,9 +16,9 @@ namespace Services.Battle
         private readonly BattleUnitStateMachineBuilder _playerStateMachineBuilder;
         private readonly BattleUnitStateMachineBuilder _enemyStateMachineBuilder;
         private readonly EnemyStateMachineBuilderFactory _enemyStateMachineBuilderFactory;
-        private readonly EffectFactory _effectFactory;
+        private readonly EffectHandler.EffectHandler _effectHandler;
         private readonly List<BattleUnit> _turnQueue = new();
-        private readonly Dictionary<BattleUnit, UnitStateMachine> _stateMachines;
+        private readonly Dictionary<BattleUnit, UnitStateMachine> _stateMachines = new();
         private readonly List<EnemyUnit> _enemies;
         private BattleUnit _currentBattleUnit;
 
@@ -28,12 +27,12 @@ namespace Services.Battle
             EnemyStateMachineBuilderFactory enemyStateMachineBuilderFactory,
             BattleUnit playerUnit, 
             List<EnemyUnit> enemies, 
-            EffectFactory effectFactory)
+            EffectHandler.EffectHandler effectHandler)
         {
             _playerStateMachineBuilder = playerStateMachineBuilder;
             _enemyStateMachineBuilderFactory = enemyStateMachineBuilderFactory;
             _enemies = enemies;
-            _effectFactory = effectFactory;
+            _effectHandler = effectHandler;
             PlayerUnitUnit = playerUnit;
         }
         
@@ -60,7 +59,7 @@ namespace Services.Battle
             ApplyEffect(target, cardSettings.Effect);
             
             if (cardSettings.CardType == CardType.Attacking)
-                AttackTarget(target, cardSettings.Damage);
+                AttackTarget(target, 0);
         }
 
         public void ApplyEffect(
@@ -68,30 +67,39 @@ namespace Services.Battle
             EffectSettings effectSettings
         )
         {
-            var effect = _effectFactory.CreateBuffEffect(target, 
-                    effectSettings.LifetimeType, 
-                    effectSettings);
-            
-            if (effectSettings.ApplicationType == ApplicationType.Instant 
-                && effectSettings.LifetimeType == LifetimeType.Permanent)
-            {
-                effect.Apply();
-            }
-                
-            target.AddBuffEffect(effect);
+            // var effect = _effectFactory.CreateBuffEffect(target, 
+            //         effectSettings.LifetimeType, 
+            //         effectSettings);
+            //
+            // if (effectSettings.ApplicationType == ApplicationType.Instant 
+            //     && effectSettings.LifetimeType == LifetimeType.Permanent)
+            // {
+            //     effect.Apply(PlayerUnitUnit, target);
+            // }
+            //     
+            // target.AddBuffEffect(effect);
         }
 
         public void AttackTarget(BattleUnit target, int damage)
         {
-            var effect = new BaseAttackEffect(target, ApplicationType.Instant, damage);
-            effect.Apply();
+            var effect = _effectHandler.GetHandler<BaseAttackEffect>();
+            
+            effect.Apply(PlayerUnitUnit, target);
         }
 
         private void BeginNextTurn()
         {
-            _stateMachines[_currentBattleUnit].ChangeState<OnTurnFinishState>();
-            _currentBattleUnit = GetNextUnit();
-            _stateMachines[_currentBattleUnit].ChangeState<OnTurnStartState>();
+            if (_currentBattleUnit != null)
+            {
+                _stateMachines[_currentBattleUnit].ChangeState<OnTurnFinishState>();
+                _currentBattleUnit = GetNextUnit();
+                _stateMachines[_currentBattleUnit].ChangeState<OnTurnStartState>();
+            }
+            else
+            {
+                _currentBattleUnit = GetNextUnit();
+                _stateMachines[_currentBattleUnit].ChangeState<OnTurnStartState>();
+            }
         }
 
         private void RemoveDeadUnit(BattleUnit battleUnit)

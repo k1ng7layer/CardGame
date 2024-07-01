@@ -8,7 +8,6 @@ namespace Settings.Cards
     {
         public CardType CardType;
         public int Cost;
-        public int Damage;
         public EffectSettings Effect;
     } 
 }

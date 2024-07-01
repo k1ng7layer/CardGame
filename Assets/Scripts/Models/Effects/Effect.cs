@@ -5,20 +5,17 @@ namespace Models.Effects
 {
     public class Effect
     {
-        protected readonly BattleUnit Target;
+        protected EffectSettings Settings { get; }
 
-        public Effect(
-            BattleUnit target,
-            ApplicationType applicationType
-        )
+        public Effect(EffectSettings settings)
         {
-            ApplicationType = applicationType;
-            Target = target;
+            Settings = settings;
+            ApplicationType = settings.ApplicationType;
         }
         
-        public ApplicationType ApplicationType { get; }
+        public ApplicationType ApplicationType { get;}
 
-        public virtual void Apply()
+        public virtual void Apply(BattleUnit user, BattleUnit target)
         { }
     }
 }

@@ -8,23 +8,18 @@ namespace Models.Effects
     {
         private readonly float _damage;
         
-        public BaseAttackEffect(
-            BattleUnit target, 
-            ApplicationType applicationType,
-            int damage
-        ) : base(target, applicationType)
+        public BaseAttackEffect(EffectSettings settings) : base(settings)
         {
-            _damage = damage;
         }
         
-        public override void Apply()
+        public override void Apply(BattleUnit user, BattleUnit target)
         {
-            var block = Target.UnitAttributes[EffectType.Block].Value;
+            var block = target.UnitAttributes[EffectType.Block].Value;
             var trueDamage = _damage - block;
             
             trueDamage = Mathf.Clamp(trueDamage, 0f, Mathf.Infinity);
-            Target.UnitAttributes[EffectType.Block].Value -= _damage;
-            Target.UnitAttributes[EffectType.Health].Value -= trueDamage;
+            target.UnitAttributes[EffectType.Block].Value -= _damage;
+            target.UnitAttributes[EffectType.Health].Value -= trueDamage;
         }
     }
 }

@@ -41,12 +41,12 @@ namespace UI.Core
             Supyrb.Signals.Get<SignalCloseWindow>().AddListener(CloseLastWindow);
         }
 
-        private void OpenNewWindow(SignalOpenWindow signal)
+        private void OpenNewWindow(Type windowType)
         {
             if (_currentWindow != null)
                 CloseWindow(_currentWindow);
 
-            var window = _windows[signal.WindowType];
+            var window = _windows[windowType];
             OpenWindow(window);
         }
 

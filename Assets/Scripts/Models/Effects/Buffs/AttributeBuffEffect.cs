@@ -6,20 +6,20 @@ namespace Models.Effects.Buffs
     public class AttributeBuffEffect : Effect
     {
         private readonly EffectSettings _effectSettings;
-
-        public AttributeBuffEffect(BattleUnit target,
-            ApplicationType applicationType, EffectSettings effectSettings) : base(target, applicationType)
-        {
-            _effectSettings = effectSettings;
-        }
+        private BattleUnit _target;
+        
+        public AttributeBuffEffect(EffectSettings settings) : base(settings)
+        { }
         
         public bool Expired { get; private set; }
         
-        public override void Apply()
+        public override void Apply(BattleUnit user, BattleUnit target)
         {
+            _target = target;
+            
             foreach (var attributeModifier in _effectSettings.AttributeModifiers)
             {
-                if (!Target.UnitAttributes.TryGetValue(attributeModifier.Effect, out var attribute))
+                if (!target.UnitAttributes.TryGetValue(attributeModifier.Effect, out var attribute))
                     continue;
                 
                 attribute.AddModifier(attributeModifier);
@@ -30,7 +30,7 @@ namespace Models.Effects.Buffs
         {
             foreach (var attributeModifier in _effectSettings.AttributeModifiers)
             {
-                if (!Target.UnitAttributes.TryGetValue(attributeModifier.Effect, out var attribute))
+                if (!_target.UnitAttributes.TryGetValue(attributeModifier.Effect, out var attribute))
                     continue;
                 
                 attribute.TryRemoveModifier(attributeModifier);
@@ -41,6 +41,5 @@ namespace Models.Effects.Buffs
         
         public virtual void Tick()
         { }
-        
     }
 }
