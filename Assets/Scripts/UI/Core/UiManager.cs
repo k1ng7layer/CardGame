@@ -39,6 +39,11 @@ namespace UI.Core
         {
             Supyrb.Signals.Get<SignalOpenWindow>().AddListener(OpenNewWindow);
             Supyrb.Signals.Get<SignalCloseWindow>().AddListener(CloseLastWindow);
+
+            foreach (var controllerEntry in _controllers)
+            {
+                controllerEntry.Value.Initialize();
+            }
         }
 
         private void OpenNewWindow(Type windowType)

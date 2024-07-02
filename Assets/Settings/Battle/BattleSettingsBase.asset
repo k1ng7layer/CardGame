@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae0641f8e9fe43dab58e50bfb92b32e0, type: 3}
-  m_Name: EnemyType1
+  m_Script: {fileID: 11500000, guid: d6ac64112b534cf680ec0343f9bc08cc, type: 3}
+  m_Name: BattleSettingsBase
   m_EditorClassIdentifier: 
-  _enemyType: 1
-  _deck: {fileID: 0}
-  _prefab: {fileID: 4294954909318845609, guid: 9a9f8fa0aea497341a5e771e44c5b966, type: 3}
-  Block: 4
-  Health: 20
+  _starterCardsNumber: 5

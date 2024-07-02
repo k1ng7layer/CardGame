@@ -2,10 +2,11 @@
 
 namespace Settings.Battle
 {
+    [CreateAssetMenu(menuName = "Settings/BattleSettingsBase", fileName = "BattleSettingsBase")]
     public class BattleSettingsBase : ScriptableObject
     {
-        [SerializeField] private BattleSettings _gameBattles;
+        [SerializeField] private int _starterCardsNumber;
 
-        public BattleSettings BattleSettings => _gameBattles;
+        public int StarterCardsNumber => _starterCardsNumber;
     }
 }

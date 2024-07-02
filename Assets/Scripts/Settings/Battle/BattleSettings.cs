@@ -1,4 +1,4 @@
-﻿using Settings.Enemy;
+﻿using Settings.Units;
 using UnityEngine;
 
 namespace Settings.Battle

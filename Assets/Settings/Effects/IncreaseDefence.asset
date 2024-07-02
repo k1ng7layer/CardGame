@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df32048a22904223af4b27cdf91c0409, type: 3}
   m_Name: IncreaseDefence
   m_EditorClassIdentifier: 
+  HandlerType:
+    assemblyQualifiedName: Models.Effects.BaseAttackEffect, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   LifetimeType: 0
   LifeTimeTurns: 0
   ApplicationType: 1

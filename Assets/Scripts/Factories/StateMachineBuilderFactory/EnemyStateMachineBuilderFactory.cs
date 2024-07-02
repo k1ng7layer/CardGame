@@ -10,7 +10,6 @@ namespace Factories.StateMachineBuilderFactory
         {
             return enemyType switch
             {
-                EnemyType.Simple => new EnemyStateMachineBuilder(),
                 EnemyType.Type1 => new EnemyStateMachineBuilder(),
                 EnemyType.Type2 => new EnemyStateMachineBuilder()
             };

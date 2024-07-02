@@ -8,5 +8,6 @@ namespace Settings.Effects
         public EffectType AttributeType;
         public float InitialValue;
         public float MaxValue;
+        public float MinValue;
     }
 }

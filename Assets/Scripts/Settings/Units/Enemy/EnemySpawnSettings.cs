@@ -2,7 +2,7 @@
 using Models;
 using UnityEngine;
 
-namespace Settings.Enemy
+namespace Settings.Units.Enemy
 {
     [Serializable]
     public class EnemySpawnSettings

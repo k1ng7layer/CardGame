@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27762121052543ae9bf18a10d7ebe958, type: 3}
+  m_Name: GameSettingsBase
+  m_EditorClassIdentifier: 
+  battleBattleSettingsBase: {fileID: 11400000, guid: 5aa91e50461453040b97854014700fa5, type: 2}
+  _effectSettingsBase: {fileID: 11400000, guid: 3cd9dd94eb4eaee42861fb12085a97b6, type: 2}
+  _prefabBase: {fileID: 11400000, guid: 6bb812e82685d2b46a739ea7a98899f6, type: 2}
+  _enemySettingsBase: {fileID: 11400000, guid: f3767bb1af3e516429b0f83234b5aa84, type: 2}
+  _playerSettings: {fileID: 11400000, guid: 7e1ff0a9fec241c4b85379e183b654fa, type: 2}

@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae0641f8e9fe43dab58e50bfb92b32e0, type: 3}
-  m_Name: EnemyType2
+  m_Script: {fileID: 11500000, guid: 2559f0f18a4b4e05bb4a9946e292132c, type: 3}
+  m_Name: PlayerDeck
   m_EditorClassIdentifier: 
-  _enemyType: 2
-  _deck: {fileID: 0}
-  _prefab: {fileID: 5172000781572589792, guid: f542610141ecdb04286468e8e58b44af, type: 3}
-  Block: 0
-  Health: 10
+  _cards:
+  - {fileID: 11400000, guid: 8aea8b0e112e5084da604f1cfafc621b, type: 2}
+  - {fileID: 11400000, guid: 681cd449680fe714ca2fedab01bb5b87, type: 2}

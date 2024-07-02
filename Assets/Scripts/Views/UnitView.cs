@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Views
 {
-    public class UnitView : MonoBehaviour
+    public class UnitView : MonoBehaviour, IUnitView
     {
         public void Initialize(BattleUnit unit)
         {

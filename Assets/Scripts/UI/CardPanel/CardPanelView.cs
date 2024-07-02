@@ -35,7 +35,7 @@ namespace UI.CardPanel
             cardView.Initialize(cardSettings);
             cardView.CardDragged += OnCardDrag;
             cardView.CardBeginDrag += OnCardBeginDrag;
-            cardView.CardDragged += OnCardEndDrag;
+            cardView.CardEndDrag += OnCardEndDrag;
             
             _cardViews.Add(cardView);
         }
@@ -47,11 +47,13 @@ namespace UI.CardPanel
 
         private void OnCardBeginDrag(CardView cardView)
         {
+            CardBeginDrag?.Invoke(cardView);
             _dragging = true;
         }
         
         private void OnCardEndDrag(CardView cardView)
         {
+            CardEndDrag?.Invoke(cardView);
             _dragging = false;
         }
 
@@ -68,9 +70,14 @@ namespace UI.CardPanel
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             var layer = LayerMask.NameToLayer($"Unit");
             
-            if (!Physics.Raycast(ray, out var hit, Mathf.Infinity, layer))
+            // if (!Physics.Raycast(ray, out var hit, Mathf.Infinity, layer))
+            //     return;
+            
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            if (hit.transform == null)
                 return;
             
+            Debug.Log($"hit: {hit.transform.gameObject}");
             if (!hit.transform.transform.gameObject.TryGetComponent<UnitView>(out var unit))
                 return;
 

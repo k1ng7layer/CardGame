@@ -2,7 +2,8 @@
 
 namespace Settings.Effects
 {
-    public abstract class EffectSettingsBase : ScriptableObject
+    [CreateAssetMenu(menuName = "Settings/Effects/EffectSettingsBase", fileName = "EffectSettingsBase")]
+    public class EffectSettingsBase : ScriptableObject
     {
         [SerializeField] protected EffectSettings[] _effects;
         

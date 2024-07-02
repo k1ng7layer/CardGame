@@ -6,16 +6,16 @@ namespace Models.Effects.Buffs
     public class AttributeBuffEffect : Effect
     {
         private readonly EffectSettings _effectSettings;
-        private BattleUnit _target;
+        protected BattleUnit Target;
         
         public AttributeBuffEffect(EffectSettings settings) : base(settings)
         { }
         
-        public bool Expired { get; private set; }
+        public bool Expired { get; protected set; }
         
         public override void Apply(BattleUnit user, BattleUnit target)
         {
-            _target = target;
+            Target = target;
             
             foreach (var attributeModifier in _effectSettings.AttributeModifiers)
             {
@@ -24,19 +24,8 @@ namespace Models.Effects.Buffs
                 
                 attribute.AddModifier(attributeModifier);
             }
-        }
-        
-        public void Disable()
-        {
-            foreach (var attributeModifier in _effectSettings.AttributeModifiers)
-            {
-                if (!_target.UnitAttributes.TryGetValue(attributeModifier.Effect, out var attribute))
-                    continue;
-                
-                attribute.TryRemoveModifier(attributeModifier);
-            }
 
-            Expired = true;
+            target.AddBuffEffect(this);
         }
         
         public virtual void Tick()

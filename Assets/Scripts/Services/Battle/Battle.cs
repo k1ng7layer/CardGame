@@ -16,7 +16,7 @@ namespace Services.Battle
         private readonly BattleUnitStateMachineBuilder _playerStateMachineBuilder;
         private readonly BattleUnitStateMachineBuilder _enemyStateMachineBuilder;
         private readonly EnemyStateMachineBuilderFactory _enemyStateMachineBuilderFactory;
-        private readonly EffectHandler.EffectHandler _effectHandler;
+        private readonly EffectHandler.EffectFactory _effectFactory;
         private readonly List<BattleUnit> _turnQueue = new();
         private readonly Dictionary<BattleUnit, UnitStateMachine> _stateMachines = new();
         private readonly List<EnemyUnit> _enemies;
@@ -27,12 +27,12 @@ namespace Services.Battle
             EnemyStateMachineBuilderFactory enemyStateMachineBuilderFactory,
             BattleUnit playerUnit, 
             List<EnemyUnit> enemies, 
-            EffectHandler.EffectHandler effectHandler)
+            EffectHandler.EffectFactory effectFactory)
         {
             _playerStateMachineBuilder = playerStateMachineBuilder;
             _enemyStateMachineBuilderFactory = enemyStateMachineBuilderFactory;
             _enemies = enemies;
-            _effectHandler = effectHandler;
+            _effectFactory = effectFactory;
             PlayerUnitUnit = playerUnit;
         }
         
@@ -54,12 +54,7 @@ namespace Services.Battle
         
         public void ApplyCard(BattleUnit target, CardSettings cardSettings)
         {
-            var stateMachine = _stateMachines[_currentBattleUnit];
-
             ApplyEffect(target, cardSettings.Effect);
-            
-            if (cardSettings.CardType == CardType.Attacking)
-                AttackTarget(target, 0);
         }
 
         public void ApplyEffect(
@@ -67,24 +62,9 @@ namespace Services.Battle
             EffectSettings effectSettings
         )
         {
-            // var effect = _effectFactory.CreateBuffEffect(target, 
-            //         effectSettings.LifetimeType, 
-            //         effectSettings);
-            //
-            // if (effectSettings.ApplicationType == ApplicationType.Instant 
-            //     && effectSettings.LifetimeType == LifetimeType.Permanent)
-            // {
-            //     effect.Apply(PlayerUnitUnit, target);
-            // }
-            //     
-            // target.AddBuffEffect(effect);
-        }
-
-        public void AttackTarget(BattleUnit target, int damage)
-        {
-            var effect = _effectHandler.GetHandler<BaseAttackEffect>();
+            var effectHandler = _effectFactory.GetHandler(effectSettings);
             
-            effect.Apply(PlayerUnitUnit, target);
+            effectHandler.Apply(PlayerUnitUnit, target);
         }
 
         private void BeginNextTurn()

@@ -9,11 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae0641f8e9fe43dab58e50bfb92b32e0, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e233b421f4c422891fcf9566794fc1d, type: 3}
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
-  _enemyType: 0
-  _deck: {fileID: 0}
-  _prefab: {fileID: 6904175838185929903, guid: 1ea4b6a2ce47ca748914c28cb98a2ef5, type: 3}
-  Block: 1
-  Health: 15
+  _attributeParameters:
+  - AttributeType: 1
+    InitialValue: 100
+    MaxValue: 100
+    MinValue: 0
+  - AttributeType: 2
+    InitialValue: 4
+    MaxValue: 4
+    MinValue: 0
+  - AttributeType: 0
+    InitialValue: 0
+    MaxValue: 10
+    MinValue: 0
+  _deck: {fileID: 11400000, guid: 95e0f40a8dd030e4882014b610e8a62c, type: 2}

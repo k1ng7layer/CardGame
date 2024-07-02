@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Models.Unit
+namespace Models.Units
 {
     public class UnitViewModel 
     {

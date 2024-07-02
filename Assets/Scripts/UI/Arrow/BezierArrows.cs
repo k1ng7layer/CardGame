@@ -16,13 +16,14 @@ namespace UI.Arrow
             { new Vector2(-0.3f, 0.8f), new Vector2(0.1f, 1.4f) };
         
         private readonly List<Vector2> _controlPoints = new();
-        private RectTransform _origin;
+        //private RectTransform _origin;
+        private Vector2 _origin;
         private bool _enabled;
 
 
         private void Awake()
         {
-            _origin = GetComponent<RectTransform>();
+            //_origin = GetComponent<RectTransform>();
 
             for (int i = 0; i < NodeCount; i++)
             {
@@ -46,6 +47,7 @@ namespace UI.Arrow
 
         public void Enabled(bool value)
         {
+            _origin = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             _enabled = value;
 
             foreach (var node in _nodes)
@@ -64,7 +66,7 @@ namespace UI.Arrow
             if (!_enabled)
                 return;
             
-            var originPosition = _origin.position;
+            var originPosition = _origin;
             _controlPoints[0] = new Vector2(originPosition.x, originPosition.y);
 
             _controlPoints[3] = new Vector2(Input.mousePosition.x, Input.mousePosition.y);

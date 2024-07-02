@@ -20,7 +20,7 @@ namespace UI.CardPanel
             _battleService = battleService;
         }
 
-        public void Initialize()
+        protected override void OnInitialize()
         {
             foreach (var card in _battleDeckService.PlayerHand)
             {
@@ -50,7 +50,7 @@ namespace UI.CardPanel
             var target = cardType == CardType.Attacking ? 
                 View.HoveredUnit.BattleUnitModel : 
                 _battleService.CurrentBattle.PlayerUnitUnit;
-
+            
             if (target == null)
             {
                 PlaceCardBack(card);

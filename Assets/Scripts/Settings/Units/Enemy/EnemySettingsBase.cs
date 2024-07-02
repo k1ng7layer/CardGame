@@ -2,22 +2,22 @@
 using Models;
 using UnityEngine;
 
-namespace Settings.Enemy
+namespace Settings.Units.Enemy
 {
     [CreateAssetMenu(menuName = "Settings/Enemy/EnemySettingsBase", fileName = "EnemySettingsBase")]
-    public class UnitSettingsBase : ScriptableObject
+    public class EnemySettingsBase : ScriptableObject
     {
-        [SerializeField] private UnitSettings[] _enemySettings;
+        [SerializeField] private EnemySettings[] _enemySettings;
 
         public UnitSettings Get(EnemyType enemyType)
         {
             foreach (var enemySetting in _enemySettings)
             {
-                if (enemySetting.Type == enemyType)
+                if (enemySetting.EnemyType == enemyType)
                     return enemySetting;
             }
 
-            throw new Exception($"[{nameof(UnitSettingsBase)}] cant find settings for unit of type {enemyType}");
+            throw new Exception($"[{nameof(EnemySettingsBase)}] cant find settings for unit of type {enemyType}");
         }
     }
 }
