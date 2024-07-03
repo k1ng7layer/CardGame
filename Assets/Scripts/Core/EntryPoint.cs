@@ -1,25 +1,17 @@
 ﻿using System.Collections.Generic;
 using Factories.StateMachineBuilder.Impl;
 using Factories.StateMachineBuilderFactory;
-using Models;
-using Models.Units;
+using Helpers.Tasks.Impl;
 using Services.Battle;
 using Services.Deck;
 using Services.EffectHandler;
 using Services.Spawn.Impl;
 using Services.Unit.Impl;
 using Settings;
-using Settings.Cards;
-using Settings.Effects;
-using Settings.Prefab;
-using Settings.Units;
-using Settings.Units.Enemy;
-using Settings.Units.Player;
 using UI.CardPanel;
 using UI.Core;
 using UI.Windows;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Views;
 
 namespace Core
@@ -29,6 +21,7 @@ namespace Core
         [SerializeField] private GameSettingsBase _gameSettings;
         [SerializeField] private LevelView _levelView;
         [SerializeField] private CardPanelView _cardPanelView;
+        [SerializeField] private CoroutineDispatcher _coroutineDispatcher;
 
         private void Start()
         {
@@ -36,7 +29,7 @@ namespace Core
                 _gameSettings.BattleSettingsBase);
             battleDeck.Initialize();
             
-            var effectHandler = new EffectFactory(_gameSettings.EffectSettingsBase);
+            var effectHandler = new EffectFactory(_gameSettings.EffectSettingsBase, _coroutineDispatcher);
 
             var spawnService = new SpawnService(_gameSettings.PrefabBase);
             var unitSpawnService = new UnitSpawnService(spawnService, 

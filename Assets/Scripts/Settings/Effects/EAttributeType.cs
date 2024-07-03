@@ -1,6 +1,6 @@
 ﻿namespace Settings.Effects
 {
-    public enum EffectType
+    public enum EAttributeType
     {
         Block,
         Health,

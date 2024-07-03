@@ -1,15 +1,21 @@
-﻿using Models.Units;
+﻿using Helpers.Tasks;
+using Models.Units;
 using Settings.Effects;
 
 namespace Models.Effects.Buffs
 {
     public class AttributeBuffEffect : Effect
     {
+        private readonly ICoroutineDispatcher _coroutineDispatcher;
         private readonly EffectSettings _effectSettings;
         protected BattleUnit Target;
         
-        public AttributeBuffEffect(EffectSettings settings) : base(settings)
-        { }
+        public AttributeBuffEffect(EffectSettings settings, 
+            ICoroutineDispatcher coroutineDispatcher) 
+            : base(settings, coroutineDispatcher)
+        {
+            _coroutineDispatcher = coroutineDispatcher;
+        }
         
         public bool Expired { get; protected set; }
         
@@ -19,7 +25,7 @@ namespace Models.Effects.Buffs
             
             foreach (var attributeModifier in _effectSettings.AttributeModifiers)
             {
-                if (!target.UnitAttributes.TryGetValue(attributeModifier.Effect, out var attribute))
+                if (!target.UnitAttributes.TryGetValue(attributeModifier.Attribute, out var attribute))
                     continue;
                 
                 attribute.AddModifier(attributeModifier);

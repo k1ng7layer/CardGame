@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using System;
+using Models;
 using Settings.Effects;
 using UnityEngine;
 
@@ -9,10 +10,17 @@ namespace Settings.Units.Enemy
     {
         [SerializeField] private string _name;
         [SerializeField] private EnemyType enemyType;
-        [SerializeField] private EffectSettings[] _effects;
+        [SerializeField] private EnemyBattleEffectSettings[] _effects;
         
         public EnemyType EnemyType => enemyType;
-        public EffectSettings[] EnemyEffects => _effects;
+        public EnemyBattleEffectSettings[] EnemyEffects => _effects;
         public string EnemyName => _name;
+    }
+
+    [Serializable]
+    public class EnemyBattleEffectSettings
+    {
+        public float Chance;
+        public EffectSettings EffectSettings;
     }
 }

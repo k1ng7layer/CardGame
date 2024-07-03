@@ -22,5 +22,7 @@ namespace Settings.Effects
         [Space]
         [Header("Modifiers settings")]
         public List<AttributeModifierSettings> AttributeModifiers;
+
+        public float Damage;
     }
 }

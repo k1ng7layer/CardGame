@@ -1,14 +1,20 @@
-﻿using Models.Units;
+﻿using Helpers.Tasks;
+using Models.Units;
 using Settings.Effects;
 
 namespace Models.Effects
 {
     public class Effect
     {
+        protected readonly ICoroutineDispatcher CoroutineDispatcher;
         protected EffectSettings Settings { get; }
 
-        public Effect(EffectSettings settings)
+        public Effect(
+            EffectSettings settings, 
+            ICoroutineDispatcher coroutineDispatcher
+        )
         {
+            CoroutineDispatcher = coroutineDispatcher;
             Settings = settings;
             ApplicationType = settings.ApplicationType;
         }

@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attributeParameters:
   - AttributeType: 1
-    InitialValue: 100
-    MaxValue: 100
+    InitialValue: 50
+    MaxValue: 50
     MinValue: 0
   - AttributeType: 2
     InitialValue: 4
     MaxValue: 4
     MinValue: 0
   - AttributeType: 0
-    InitialValue: 0
+    InitialValue: 1
     MaxValue: 10
     MinValue: 0
   _deck: {fileID: 11400000, guid: 95e0f40a8dd030e4882014b610e8a62c, type: 2}

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5910464487362014810}
   - component: {fileID: 4298349501839936722}
   - component: {fileID: 5350609391649713416}
+  - component: {fileID: 1656709490800776826}
   m_Layer: 5
   m_Name: ArrowHead
   m_TagString: Untagged
@@ -35,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4298349501839936722
 CanvasRenderer:
@@ -75,3 +76,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1656709490800776826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6960090976764435579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a7aac337e1640e4aa36654059ce875f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _normalArrow: {fileID: 21300000, guid: e4c4e46ba50bb604f86f4217e0f4f7dd, type: 3}
+  _crossfire: {fileID: 21300000, guid: 033336c308c8eb048a200b88b4c9012f, type: 3}
+  _image: {fileID: 5350609391649713416}

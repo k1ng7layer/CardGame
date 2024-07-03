@@ -4,6 +4,7 @@ using TMPro;
 using UI.Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace UI.CardPanel
 {
@@ -15,6 +16,11 @@ namespace UI.CardPanel
         [SerializeField] private TextMeshProUGUI _title;
         [SerializeField] private TextMeshProUGUI _description;
         [SerializeField] private TextMeshProUGUI _cost;
+        [SerializeField] private Image _bg;
+        [SerializeField] private Color _onDragColor;
+        
+        private Color _normalColor;
+        
         public event Action<CardView> CardBeginDrag;
         public event Action<CardView> CardDragged;
         public event Action<CardView> CardEndDrag;
@@ -26,6 +32,7 @@ namespace UI.CardPanel
             _title.text = cardSettings.Title;
             _description.text = cardSettings.Description;
             _cost.text = $"{cardSettings.Cost}";
+            _normalColor = _bg.color;
         }
         
         public void OnDrag(PointerEventData eventData)
@@ -35,14 +42,13 @@ namespace UI.CardPanel
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            Debug.Log($"OnBeginDrag");
+            _bg.color = _onDragColor;
             CardBeginDrag?.Invoke(this);
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            Debug.Log($"OnEndDrag");
-
+            _bg.color = _normalColor;
             CardEndDrag?.Invoke(this);
         }
     }

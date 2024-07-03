@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attributeParameters:
   - AttributeType: 1
-    InitialValue: 10
-    MaxValue: 10
+    InitialValue: 20
+    MaxValue: 20
     MinValue: 0
   - AttributeType: 0
     InitialValue: 0
-    MaxValue: 10
+    MaxValue: 2
     MinValue: 0
   _name: 
   enemyType: 1

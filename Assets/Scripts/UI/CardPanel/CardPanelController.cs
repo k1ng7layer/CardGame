@@ -1,4 +1,5 @@
-﻿using Services.Battle;
+﻿using Models.Units;
+using Services.Battle;
 using Services.Deck;
 using Settings.Cards;
 using UI.Core;
@@ -39,17 +40,17 @@ namespace UI.CardPanel
         
         private void OnCardDrag(CardView card)
         {
-           
+            var target = GetTarget(card.AttachedCardSettings.CardType);
+            
+            View.SetCardUseAbility(target != null);
         }
 
         private void OnCardEndDrag(CardView card)
         {
             View.EnableArrow(false);
             var cardType = card.AttachedCardSettings.CardType;
-            
-            var target = cardType == CardType.Attacking ? 
-                View.HoveredUnit.BattleUnitModel : 
-                _battleService.CurrentBattle.PlayerUnitUnit;
+
+            var target = GetTarget(cardType);
             
             if (target == null)
             {
@@ -68,6 +69,15 @@ namespace UI.CardPanel
         private bool CanUseCard()
         {
             return false;
+        }
+
+        private BattleUnit GetTarget(CardType cardType)
+        {
+            var target = cardType == CardType.Attacking ? 
+                View.HoveredUnit != null ? View.HoveredUnit.BattleUnitModel : null : 
+                _battleService.CurrentBattle.PlayerUnitUnit;
+
+            return target;
         }
     }
 }

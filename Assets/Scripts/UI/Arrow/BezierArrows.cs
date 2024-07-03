@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI.Arrow
 {
@@ -9,8 +10,10 @@ namespace UI.Arrow
         public GameObject ArrowNodePrefab;
         public int NodeCount;
         public float NodeScale;
+        private ArrowHeadView _arrowHeadView;
 
         private readonly List<RectTransform> _nodes = new();
+        private readonly List<Image> _nodesImages = new();
 
         private readonly List<Vector2> _controlPointsFactors = new() 
             { new Vector2(-0.3f, 0.8f), new Vector2(0.1f, 1.4f) };
@@ -28,12 +31,13 @@ namespace UI.Arrow
             for (int i = 0; i < NodeCount; i++)
             {
                 var node = Instantiate(ArrowNodePrefab, transform).GetComponent<RectTransform>();
+                _nodesImages.Add(node.GetComponent<Image>());
                 _nodes.Add(node);
             }
             
             var head = Instantiate(ArrowHeadPrefab, transform).GetComponent<RectTransform>();
             _nodes.Add(head);
-
+            _arrowHeadView = head.GetComponent<ArrowHeadView>();
             foreach (var node in _nodes)
             {
                 node.position = new Vector3(-1000, -1000);
@@ -56,9 +60,15 @@ namespace UI.Arrow
             }
         }
 
-        public void SetHeadColor(Color color)
+        public void CanUse(bool value)
         {
-            
+            _arrowHeadView.CanUseCard(value);
+
+            foreach (var image in _nodesImages)
+            {
+                var color = value ? Color.green : Color.red;
+                image.color = color;
+            }
         }
 
         private void Update()

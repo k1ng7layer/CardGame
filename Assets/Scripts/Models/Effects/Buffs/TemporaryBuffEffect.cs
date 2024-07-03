@@ -1,4 +1,5 @@
-﻿using Settings.Effects;
+﻿using Helpers.Tasks;
+using Settings.Effects;
 
 namespace Models.Effects.Buffs
 {
@@ -7,7 +8,8 @@ namespace Models.Effects.Buffs
         private readonly EffectSettings _settings;
         private int _durationTurns;
 
-        public TemporaryBuffEffect(EffectSettings settings) : base(settings)
+        public TemporaryBuffEffect(EffectSettings settings, 
+            ICoroutineDispatcher coroutineDispatcher) : base(settings, coroutineDispatcher)
         {
             _settings = settings;
         }
@@ -25,7 +27,7 @@ namespace Models.Effects.Buffs
         {
             foreach (var attributeModifier in _settings.AttributeModifiers)
             {
-                if (!Target.UnitAttributes.TryGetValue(attributeModifier.Effect, out var attribute))
+                if (!Target.UnitAttributes.TryGetValue(attributeModifier.Attribute, out var attribute))
                     continue;
                 
                 attribute.TryRemoveModifier(attributeModifier);

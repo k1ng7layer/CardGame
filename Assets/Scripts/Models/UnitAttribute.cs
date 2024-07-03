@@ -1,15 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Settings.Effects;
+using UnityEngine;
 
 namespace Models
 {
     public class UnitAttribute
     {
         private readonly HashSet<AttributeModifierSettings> _modifiers = new();
-        private readonly float _baseValue;
         private readonly float _minValue;
         private readonly float _maxValue;
         private float _additionalValue;
+        private float _baseValue;
         private bool _isDirty;
 
         public UnitAttribute(float baseValue, float minValue, float maxValue)
@@ -19,23 +21,37 @@ namespace Models
             _maxValue = maxValue;
         }
 
+        public event Action<float> ValueChanged;
+
+        public float MaxValue => _maxValue;
+
         public float Value
         {
-            get
-            {
-                if (_isDirty)
-                {
-                    _additionalValue = CalculateValue();
-                    _isDirty = false;
-                }
-                
-                return _baseValue + _additionalValue;
-            }
+            get => _baseValue;
             set
             {
-                
+                _baseValue = value;
+                _baseValue = Mathf.Clamp(_baseValue, _minValue, MaxValue);
+                ValueChanged?.Invoke(_baseValue);
             }
         }
+        // public float Value
+        // {
+        //     get
+        //     {
+        //         if (_isDirty)
+        //         {
+        //             _additionalValue = CalculateValue();
+        //             _isDirty = false;
+        //         }
+        //         
+        //         return _baseValue + _additionalValue;
+        //     }
+        //     set
+        //     {
+        //         
+        //     }
+        // }
 
         public void AddModifier(AttributeModifierSettings modifier)
         {

@@ -2,13 +2,11 @@
 using Models;
 using Models.Units;
 using Services.Spawn;
-using Services.Spawn.Impl;
 using Settings.Effects;
 using Settings.Units;
 using Settings.Units.Enemy;
 using Settings.Units.Player;
 using UnityEngine;
-using Views;
 
 namespace Services.Unit.Impl
 {
@@ -33,6 +31,7 @@ namespace Services.Unit.Impl
             var view = _spawnService.SpawnUnit(playerName, position, Quaternion.identity);
             var attributes = InitializeAttributes(_playerSettings);
             var unit = new BattleUnit(attributes);
+            unit.SetPosition(position);
             view.Initialize(unit);
 
             return unit;
@@ -44,14 +43,15 @@ namespace Services.Unit.Impl
             var enemySettings = _enemySettingsBase.Get(enemyType);
             var attributes = InitializeAttributes(enemySettings);
             var enemyUnit = new EnemyUnit(attributes, enemyType);
+            enemyUnit.SetPosition(position);
             view.Initialize(enemyUnit);
             
             return enemyUnit;
         }
         
-        private Dictionary<EffectType, UnitAttribute> InitializeAttributes(UnitSettings unitSettings)
+        private Dictionary<EAttributeType, UnitAttribute> InitializeAttributes(UnitSettings unitSettings)
         {
-            var attributes = new Dictionary<EffectType, UnitAttribute>();
+            var attributes = new Dictionary<EAttributeType, UnitAttribute>();
             
             foreach (var setting in unitSettings.AttributeParameters)
             {

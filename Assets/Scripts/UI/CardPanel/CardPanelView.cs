@@ -14,6 +14,7 @@ namespace UI.CardPanel
         [SerializeField] private Transform _cardListRoot;
         [SerializeField] private BezierArrows _aimArrow;
         [SerializeField] private List<CardView> _cardViews;
+        [SerializeField] private LayerMask _layerMask;
         
         public event Action<CardView> CardBeginDrag;
         public event Action<CardView> CardDragged;
@@ -26,7 +27,7 @@ namespace UI.CardPanel
         
         public void SetCardUseAbility(bool value)
         {
-            _aimArrow.SetHeadColor(value ? Color.green : Color.red);
+            _aimArrow.CanUse(value);
         }
 
         public void DisplayCard(CardSettings cardSettings)
@@ -66,21 +67,20 @@ namespace UI.CardPanel
         {
             if (!_dragging)
                 return;
-
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            var mouse = Input.mousePosition;
             var layer = LayerMask.NameToLayer($"Unit");
-            
-            // if (!Physics.Raycast(ray, out var hit, Mathf.Infinity, layer))
-            //     return;
-            
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            var origin = Camera.main.ScreenToWorldPoint(new Vector3(mouse.x, mouse.y, 10f));
+            var hit = Physics2D.Raycast(origin, Vector2.zero, layer);
             if (hit.transform == null)
+            {
+                HoveredUnit = null;
                 return;
+            }
             
-            Debug.Log($"hit: {hit.transform.gameObject}");
             if (!hit.transform.transform.gameObject.TryGetComponent<UnitView>(out var unit))
                 return;
 
+            Debug.Log($"hit: {hit.transform.gameObject}");
             HoveredUnit = unit;
         }
 

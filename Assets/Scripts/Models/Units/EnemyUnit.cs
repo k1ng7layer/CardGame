@@ -6,7 +6,7 @@ namespace Models.Units
     public class EnemyUnit : BattleUnit
     {
         public EnemyUnit(
-            Dictionary<EffectType, UnitAttribute> unitAttributes, 
+            Dictionary<EAttributeType, UnitAttribute> unitAttributes, 
             EnemyType enemyType) : base(unitAttributes
         )
         {

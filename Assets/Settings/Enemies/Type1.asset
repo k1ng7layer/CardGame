@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attributeParameters:
   - AttributeType: 1
-    InitialValue: 10
-    MaxValue: 10
+    InitialValue: 20
+    MaxValue: 20
     MinValue: 0
   - AttributeType: 0
-    InitialValue: 0
-    MaxValue: 10
+    InitialValue: 1
+    MaxValue: 4
     MinValue: 0
+  _name: 
   enemyType: 0
   _effects:
   - {fileID: 11400000, guid: 2b3bb0e173fcc674898117aaf3551b6a, type: 2}
