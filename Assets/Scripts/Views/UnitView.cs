@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography;
-using Models.Units;
-using Settings.Effects;
+﻿using Models.Units;
 using UI.Unit;
 using UnityEngine;
 

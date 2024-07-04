@@ -1,5 +1,4 @@
-﻿using Settings.Units;
-using Settings.Units.Enemy;
+﻿using Settings.Units.Enemy;
 using UnityEngine;
 
 namespace Views

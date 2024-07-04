@@ -2,7 +2,7 @@ using Models.Units;
 
 namespace StateMachine
 {
-    public class UnitBattleStateMachine : global::BattleStateMachine.BattleStateMachine
+    public class UnitBattleStateMachine : BattleStateMachine.BattleStateMachine
     {
         public UnitBattleStateMachine(BattleUnit battleUnit)
         {

@@ -1,5 +1,4 @@
-﻿using System;
-using Models.Units;
+﻿using Models.Units;
 using Services.Battle;
 using Services.UnitRepository;
 using UI.Core;

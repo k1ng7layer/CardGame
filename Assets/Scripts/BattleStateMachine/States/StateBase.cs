@@ -1,6 +1,4 @@
-﻿using Models.Units;
-
-namespace BattleStateMachine.States
+﻿namespace BattleStateMachine.States
 {
     public abstract class StateBase
     {

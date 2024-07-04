@@ -6,8 +6,6 @@ using Models.Units;
 using Services.EffectHandler;
 using Services.Unit;
 using Services.UnitRepository;
-using Signals;
-using Supyrb;
 using UI.Core.Signals;
 using UI.Windows;
 using Views;

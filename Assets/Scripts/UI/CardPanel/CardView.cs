@@ -1,12 +1,10 @@
 ﻿using System;
 using Models.Cards;
-using Settings.Cards;
 using TMPro;
 using UI.Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using Card = Models.Cards.Card;
 
 namespace UI.CardPanel
 {

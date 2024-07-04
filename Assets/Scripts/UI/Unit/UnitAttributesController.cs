@@ -1,8 +1,6 @@
-﻿using System;
-using Models.Units;
+﻿using Models.Units;
 using Settings.Effects;
 using UI.Core;
-using UnityEngine;
 
 namespace UI.Unit
 {

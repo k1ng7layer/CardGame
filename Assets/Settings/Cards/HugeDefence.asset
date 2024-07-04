@@ -15,5 +15,5 @@ MonoBehaviour:
   CardType: 1
   Cost: 2
   Effect: {fileID: 11400000, guid: 5e91e8a6ad7617f48a16e1918d5dd011, type: 2}
-  Title: 
+  Title: Defence gain
   Description: "\u0414\u0430\u0435\u0442 3 \u043E\u0447\u043A\u0430 \u0431\u043B\u043E\u043A\u0430"

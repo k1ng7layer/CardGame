@@ -15,6 +15,6 @@ MonoBehaviour:
   CardType: 1
   Cost: 1
   Effect: {fileID: 11400000, guid: 9a882da24098812478d1b9cc9577708c, type: 2}
-  Title: 
+  Title: Heal
   Description: "\u0412\u043E\u0441\u0441\u0442\u0430\u043D\u0430\u0432\u043B\u0438\u0432\u0430\u0435\u0442
     \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u0435 \u043D\u0430 5 \u0435\u0434\u0438\u043D\u0438\u0446"

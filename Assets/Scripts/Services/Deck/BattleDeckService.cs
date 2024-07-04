@@ -5,9 +5,7 @@ using Models.Units;
 using Services.Battle;
 using Services.UnitRepository;
 using Settings.Battle;
-using Settings.Cards;
-using TreeEditor;
-
+using Random = UnityEngine.Random;
 
 namespace Services.Deck
 {
@@ -40,7 +38,7 @@ namespace Services.Deck
         {
             for (int i = 0; i < _gameSettings.StarterCardsNumber; i++)
             {
-                var cardIndex = UnityEngine.Random.Range(0, _playerDeck.Cards.Count);
+                var cardIndex = Random.Range(0, _playerDeck.Cards.Count);
                 var cardSettings = _playerDeck.Cards[cardIndex];
                 var card = new Card(cardSettings, cardSettings.CardType, cardIndex);
                 card.UsedStateChanged += HandleCardUse;
@@ -109,7 +107,7 @@ namespace Services.Deck
         
         private void Shuffle(List<Card> cards)  
         {  
-            var rng = new Random();
+            var rng = new System.Random();
             
             int n = cards.Count;  
             while (n > 1) {  

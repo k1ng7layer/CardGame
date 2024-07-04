@@ -1,4 +1,3 @@
-using System;
 using Services.UnitRepository;
 using Settings.Effects;
 using UI.Core;

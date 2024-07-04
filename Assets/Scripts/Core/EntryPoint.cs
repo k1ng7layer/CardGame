@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Factories.StateMachineBuilder.Impl;
 using Factories.StateMachineBuilderFactory;
 using Helpers.Tasks.Impl;

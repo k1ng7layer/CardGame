@@ -1,5 +1,4 @@
-﻿using System;
-using Models.Cards;
+﻿using Models.Cards;
 using Models.Units;
 using Services.Battle;
 using Services.Deck;

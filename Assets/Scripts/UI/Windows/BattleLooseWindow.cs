@@ -1,5 +1,4 @@
 ﻿using UI.BattleLoose;
-using UI.BattleWin;
 using UI.Core;
 
 namespace UI.Windows

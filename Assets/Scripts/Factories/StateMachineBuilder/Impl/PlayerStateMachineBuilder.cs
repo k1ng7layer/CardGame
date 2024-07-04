@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using BattleStateMachine.States;
-using BattleStateMachine.States.Impl;
 using BattleStateMachine.States.Units;
 using StateMachine;
 

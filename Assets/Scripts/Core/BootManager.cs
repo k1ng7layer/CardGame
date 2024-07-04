@@ -1,4 +1,3 @@
-using System;
 using Services.Level.Impl;
 using Services.SceneLoading;
 using Settings.GameLevels;

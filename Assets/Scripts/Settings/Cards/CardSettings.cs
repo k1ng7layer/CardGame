@@ -1,6 +1,5 @@
 ﻿using Settings.Effects;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Settings.Cards
 {

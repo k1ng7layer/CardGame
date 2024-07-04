@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using BattleStateMachine.States.Impl;
 using BattleStateMachine.States.Units;
 using Factories.StateMachineBuilder;
 using Factories.StateMachineBuilderFactory;
 using Models.Cards;
 using Models.Units;
+using Services.EffectHandler;
 using Settings.Effects;
 using Signals;
 using StateMachine;
-using Supyrb;
 
 namespace Services.Battle
 {
@@ -18,7 +17,7 @@ namespace Services.Battle
         private readonly UnitStateMachineBuilder _playerStateMachineBuilder;
         private readonly UnitStateMachineBuilder _enemyStateMachineBuilder;
         private readonly EnemyStateMachineBuilderFactory _enemyStateMachineBuilderFactory;
-        private readonly EffectHandler.EffectFactory _effectFactory;
+        private readonly EffectFactory _effectFactory;
         private readonly List<BattleUnit> _turnQueue = new();
         private readonly Dictionary<BattleUnit, UnitBattleStateMachine> _stateMachines = new();
         private readonly List<EnemyUnit> _enemies;
@@ -29,7 +28,7 @@ namespace Services.Battle
             EnemyStateMachineBuilderFactory enemyStateMachineBuilderFactory,
             BattleUnit playerUnit, 
             List<EnemyUnit> enemies, 
-            EffectHandler.EffectFactory effectFactory)
+            EffectFactory effectFactory)
         {
             _playerStateMachineBuilder = playerStateMachineBuilder;
             _enemyStateMachineBuilderFactory = enemyStateMachineBuilderFactory;

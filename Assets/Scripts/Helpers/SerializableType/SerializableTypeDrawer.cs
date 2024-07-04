@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Helpers.SerializableType
 {
-    [CustomPropertyDrawer(typeof(Helpers.SerializableType.SerializableType))]
+    [CustomPropertyDrawer(typeof(SerializableType))]
     public class SerializableTypeDrawer : PropertyDrawer {
         TypeFilterAttribute typeFilter;
         string[] typeNames, typeFullNames;

@@ -5,7 +5,6 @@ using Settings.Prefab;
 using Settings.Units.Enemy;
 using Settings.Units.Player;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Settings
 {

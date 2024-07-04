@@ -2,7 +2,6 @@
 using Helpers.SerializableType;
 using Models.Effects;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Settings.Effects
 {

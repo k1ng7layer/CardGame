@@ -15,5 +15,5 @@ MonoBehaviour:
   CardType: 1
   Cost: 1
   Effect: {fileID: 11400000, guid: 2b3bb0e173fcc674898117aaf3551b6a, type: 2}
-  Title: 
+  Title: Small defence
   Description: "\u0414\u0430\u0435\u0442 1 \u043E\u0447\u043A\u043E \u0431\u043B\u043E\u043A\u0430"

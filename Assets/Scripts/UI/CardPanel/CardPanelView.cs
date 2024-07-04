@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Models.Cards;
-using Settings.Cards;
 using UI.Arrow;
 using UI.Core;
 using UnityEngine;
 using Views;
-using Object = UnityEngine.Object;
 
 namespace UI.CardPanel
 {
@@ -15,17 +13,12 @@ namespace UI.CardPanel
         [SerializeField] private CardView _cardViewPrefab;
         [SerializeField] private Transform _cardListRoot;
         [SerializeField] private BezierArrows _aimArrow;
-        [SerializeField] private LayerMask _layerMask;
-
-        private Dictionary<Card, CardView> _displayedCards = new();
+        
+        private bool _dragging;
         
         public event Action<CardView> CardBeginDrag;
         public event Action<CardView> CardDragged;
         public event Action<CardView> CardEndDrag;
-        public event Action<UnitView> PointerOnUnitEnter;
-        public event Action<UnitView> PointerOnUnitExit;
-
-        private bool _dragging;
         
         public UnitView HoveredUnit { get; private set; }
         public Dictionary<Card, CardView> DisplayedCards { get; private set; } = new();
@@ -109,8 +102,7 @@ namespace UI.CardPanel
             
             if (!hit.transform.transform.gameObject.TryGetComponent<UnitView>(out var unit))
                 return;
-
-            Debug.Log($"hit: {hit.transform.gameObject}");
+            
             HoveredUnit = unit;
         }
 
@@ -124,7 +116,6 @@ namespace UI.CardPanel
                 
                 Destroy(cardEntry.Value.gameObject);
             }
-            
         }
     }
 }
