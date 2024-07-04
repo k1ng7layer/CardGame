@@ -99,7 +99,6 @@ namespace UI.CardPanel
                 ApplicationType.Instant => "at the time of use",
                 ApplicationType.TurnStart => "at the beginning of th next turn",
                 ApplicationType.TurnEnd => "at the end of the current turn",
-                _ => throw new ArgumentOutOfRangeException(nameof(applicationType), applicationType, null)
             };
         }
     }

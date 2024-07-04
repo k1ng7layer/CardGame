@@ -134,15 +134,6 @@ namespace UI.CardPanel
             _battleService.CurrentBattle.ApplyCard(View.HoveredUnit.BattleUnitModel, card.AttachedCard);
         }
 
-        private BattleUnit GetTarget(CardType cardType)
-        {
-            var target = cardType == CardType.Attacking ? 
-                View.HoveredUnit != null ? View.HoveredUnit.BattleUnitModel : null : 
-                _battleService.CurrentBattle.PlayerUnit;
-
-            return target;
-        }
-
         private bool TargetIsPlayer(UnitView view)
         {
             return view != null && view.BattleUnitModel == _playerUnitHolder.PlayerUnit;
