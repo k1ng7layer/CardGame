@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attributeParameters:
   - AttributeType: 1
-    InitialValue: 50
-    MaxValue: 50
+    InitialValue: 20
+    MaxValue: 20
     MinValue: 0
   - AttributeType: 2
     InitialValue: 4

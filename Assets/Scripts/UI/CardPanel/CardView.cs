@@ -19,6 +19,7 @@ namespace UI.CardPanel
         [SerializeField] private TextMeshProUGUI _title;
         [SerializeField] private TextMeshProUGUI _description;
         [SerializeField] private TextMeshProUGUI _cost;
+        [SerializeField] private Image _energyImage;
         [SerializeField] private Image _bg;
         [SerializeField] private Color _onDragColor;
         
@@ -67,6 +68,7 @@ namespace UI.CardPanel
 
         public void SetInteractable(bool value)
         {
+            _energyImage.color = value ? Color.yellow : Color.red;
             _interactable = value;
         }
 
