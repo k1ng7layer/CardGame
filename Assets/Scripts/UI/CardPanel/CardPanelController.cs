@@ -7,6 +7,7 @@ using Settings.Battle;
 using Settings.Cards;
 using Settings.Effects;
 using UI.Core;
+using Views;
 
 namespace UI.CardPanel
 {
@@ -113,27 +114,24 @@ namespace UI.CardPanel
 
         private void OnCardBeginDrag(CardView card)
         {
-            View.EnableArrow(card.AttachedCard.CardType == CardType.Attacking);
+            View.EnableArrow(true);
         }
         
         private void OnCardDrag(CardView card)
         {
-            var target = GetTarget(card.AttachedCard.CardType);
-            
-            View.SetCardUseAbility(target != null);
+            var hoveredView = View.HoveredUnit;
+            var canUseCard = CanUseCardOnTarget(card.AttachedCard, hoveredView);
+            View.SetCardUseAbility(canUseCard);
         }
 
         private void OnCardEndDrag(CardView card)
         {
             View.EnableArrow(false);
-            var cardType = card.AttachedCard.CardType;
-
-            var target = GetTarget(cardType);
             
-            if (target == null)
+            if (View.HoveredUnit == null || !CanUseCardOnTarget(card.AttachedCard, View.HoveredUnit))
                 return;
                 
-            _battleService.CurrentBattle.ApplyCard(target, card.AttachedCard);
+            _battleService.CurrentBattle.ApplyCard(View.HoveredUnit.BattleUnitModel, card.AttachedCard);
         }
 
         private BattleUnit GetTarget(CardType cardType)
@@ -143,6 +141,28 @@ namespace UI.CardPanel
                 _battleService.CurrentBattle.PlayerUnit;
 
             return target;
+        }
+
+        private bool TargetIsPlayer(UnitView view)
+        {
+            return view != null && view.BattleUnitModel == _playerUnitHolder.PlayerUnit;
+        }
+
+        private bool TargetIsEnemy(UnitView targetView)
+        {
+            return targetView != null && !TargetIsPlayer(targetView);
+        }
+
+        private bool CanUseCardOnTarget(Card card, UnitView view)
+        {
+            switch (card.CardType)
+            {
+                case CardType.Attacking when TargetIsEnemy(view):
+                case CardType.Defensive when TargetIsPlayer(view):
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 }

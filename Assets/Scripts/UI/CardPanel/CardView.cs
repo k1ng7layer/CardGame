@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Text;
 using Models.Cards;
+using Settings.Cards;
+using Settings.Effects;
 using TMPro;
 using UI.Core;
 using UnityEngine;
@@ -31,7 +34,7 @@ namespace UI.CardPanel
         {
             AttachedCard = card;
             _title.text = card.Settings.Title;
-            _description.text = card.Settings.Description;
+            SetDescription(card.Settings);
             _cost.text = $"{card.Cost}";
             _normalColor = _bg.color;
         }
@@ -65,6 +68,39 @@ namespace UI.CardPanel
         public void SetInteractable(bool value)
         {
             _interactable = value;
+        }
+
+        private void SetDescription(CardSettings settings)
+        {
+            StringBuilder builder = new StringBuilder();
+            foreach (var attributeModifier in settings.Effect.AttributeModifiers)
+            {
+                var sign = GetSign(attributeModifier.Value);
+                builder.AppendLine($"{sign} {attributeModifier.Value} {attributeModifier.Attribute}");
+            }
+            
+            if (settings.Effect.Damage > 0)
+                builder.AppendLine($"Deals {settings.Effect.Damage} damage");
+            
+            builder.AppendLine($"{GetApplicationType(settings.Effect.ModifiersApplicationType)}");
+            
+            _description.text = $"{builder}";
+        }
+
+        private string GetSign(float value)
+        {
+            return value >= 0 ? "+" : "-";
+        }
+
+        private string GetApplicationType(ApplicationType applicationType)
+        {
+            return applicationType switch
+            {
+                ApplicationType.Instant => "at the time of use",
+                ApplicationType.TurnStart => "at the beginning of th next turn",
+                ApplicationType.TurnEnd => "at the end of the current turn",
+                _ => throw new ArgumentOutOfRangeException(nameof(applicationType), applicationType, null)
+            };
         }
     }
 }
