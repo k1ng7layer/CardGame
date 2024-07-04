@@ -22,6 +22,8 @@ namespace Models.Effects
         
         public override void Apply(BattleUnit attacker, BattleUnit target)
         {
+            attacker.SetInAction(true);
+            
             _initialPosition = attacker.Position;
             var dirVector = target.Position - attacker.Position;
             
@@ -39,16 +41,19 @@ namespace Models.Effects
         private void OnUnitReachedTarget(BattleUnit attacker, BattleUnit target)
         {
             PerformAttack(attacker, target);
-            CoroutineDispatcher.Delay(0.4f, () => { MoveBack(attacker);});
+            CoroutineDispatcher.Delay(0.6f, () => { MoveBack(attacker);});
         }
 
         private IEnumerator MoveUnitToTarget(BattleUnit attacker, Vector3 position)
         {
-            while ((position - attacker.Position).sqrMagnitude >= 0.0001f)
+            while ((position - attacker.Position).magnitude >= 0.01f)
             {
-                var dir = (position - attacker.Position).normalized;
-                var movement = attacker.Position + dir * Time.deltaTime * 10f;
-                attacker.SetPosition(movement);
+                var pos = Vector3.MoveTowards(
+                    attacker.Position, 
+                    position, 
+                    9f * Time.deltaTime);
+                
+                attacker.SetPosition(pos);
 
                 yield return null;
             }
@@ -67,7 +72,11 @@ namespace Models.Effects
 
         private void MoveBack(BattleUnit unit)
         {
-            CoroutineDispatcher.RunCoroutine(MoveUnitToTarget(unit, _initialPosition));
+            CoroutineDispatcher.RunCoroutine(MoveUnitToTarget(unit, _initialPosition), () =>
+            {
+                unit.SetInAction(false);
+                Finish();
+            });
         }
     }
 }

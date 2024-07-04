@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
-using Services.Battle.StateMachine;
-using Services.Battle.StateMachine.States;
-using Services.Battle.StateMachine.States.Impl;
+using BattleStateMachine.States;
+using BattleStateMachine.States.Impl;
+using BattleStateMachine.States.Units;
+using StateMachine;
 
 namespace Factories.StateMachineBuilder.Impl
 {
-    public class PlayerStateMachineBuilder : BattleUnitStateMachineBuilder
+    public class PlayerStateMachineBuilder : UnitStateMachineBuilder
     {
-        protected override void ComposeStates(List<StateBase> stateList, UnitStateMachine stateMachine)
+        protected override void ComposeStates(List<StateBase> stateList, UnitBattleStateMachine battleStateMachine)
         {
-            stateMachine.AddState(new OnTurnFinishState(stateMachine));
-            stateMachine.AddState(new OnTurnStartState(stateMachine));
+            battleStateMachine.AddState(new OnTurnFinishState(battleStateMachine));
+            battleStateMachine.AddState(new PlayerStartTurnState(battleStateMachine));
         }
     }
 }

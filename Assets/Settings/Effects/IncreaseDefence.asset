@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: IncreaseDefence
   m_EditorClassIdentifier: 
   HandlerType:
-    assemblyQualifiedName: Models.Effects.BaseAttackEffect, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  LifetimeType: 0
-  LifeTimeTurns: 0
-  ApplicationType: 1
+    assemblyQualifiedName: Models.Effects.Buffs.AttributeBuffEffect, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  ModifiersApplicationType: 0
   AttributeModifiers:
   - {fileID: 11400000, guid: d536326cd7b455741bd6ba41103e351a, type: 2}
+  Description: Block+
+  Damage: 0

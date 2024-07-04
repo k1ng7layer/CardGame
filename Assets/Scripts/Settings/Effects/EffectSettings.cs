@@ -2,6 +2,7 @@
 using Helpers.SerializableType;
 using Models.Effects;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Settings.Effects
 {
@@ -11,18 +12,16 @@ namespace Settings.Effects
         [TypeFilter(typeof(Effect))]
         public SerializableType HandlerType;
         
-        [Header("Lifetime settings")]
-        public LifetimeType LifetimeType;
-        public int LifeTimeTurns;
-
-        [Space]
-        [Header("Application settings")] 
-        public ApplicationType ApplicationType;
-        
         [Space]
         [Header("Modifiers settings")]
+        public ApplicationType ModifiersApplicationType;
         public List<AttributeModifierSettings> AttributeModifiers;
 
+        [Space]
+        [TextArea(5, 5)]
+        public string Description;
+        
+        [Space] 
         public float Damage;
     }
 }

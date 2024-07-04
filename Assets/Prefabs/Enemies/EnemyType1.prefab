@@ -115,8 +115,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6539969617256562345}
-  - component: {fileID: 4743162117878818007}
   - component: {fileID: 1392030043455821510}
+  - component: {fileID: 4743162117878818007}
   m_Layer: 6
   m_Name: EnemyType1
   m_TagString: Untagged
@@ -138,23 +138,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1168569173341822622}
-  - {fileID: 433415629885712804}
+  - {fileID: 5800881397501356760}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4743162117878818007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8577105578933328662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b09a1b0150584cb6af627601ddcae090, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 3255186812067466090}
-  _unitCanvas: {fileID: 7285892765085024854}
 --- !u!61 &1392030043455821510
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -200,6 +186,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1451288, y: 2.558979}
   m_EdgeRadius: 0
+--- !u!114 &4743162117878818007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8577105578933328662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b09a1b0150584cb6af627601ddcae090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 3255186812067466090}
+  _unitCanvas: {fileID: 44306250513295439}
 --- !u!1001 &2683013041921407889
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -301,13 +301,13 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50bfb7d7808d90842b985549cced74a7, type: 3}
---- !u!224 &433415629885712804 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2537838989462180405, guid: 50bfb7d7808d90842b985549cced74a7, type: 3}
+--- !u!223 &44306250513295439 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 2713016808031097822, guid: 50bfb7d7808d90842b985549cced74a7, type: 3}
   m_PrefabInstance: {fileID: 2683013041921407889}
   m_PrefabAsset: {fileID: 0}
---- !u!223 &7285892765085024854 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 4622745986245884359, guid: 50bfb7d7808d90842b985549cced74a7, type: 3}
+--- !u!224 &5800881397501356760 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8483414734182961481, guid: 50bfb7d7808d90842b985549cced74a7, type: 3}
   m_PrefabInstance: {fileID: 2683013041921407889}
   m_PrefabAsset: {fileID: 0}

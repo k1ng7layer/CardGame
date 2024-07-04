@@ -2,10 +2,11 @@
 using Models.Units;
 using Settings.Effects;
 using UI.Core;
+using UnityEngine;
 
 namespace UI.Unit
 {
-    public class UnitAttributesController : UiController<UnitAttributesView>, IDisposable
+    public class UnitAttributesController : UiController<UnitAttributesView>
     {
         private readonly BattleUnit _unit;
 
@@ -24,9 +25,11 @@ namespace UI.Unit
             
             OnHealthChanged(health.Value);
             OnBlockChanged(block.Value);
+            
+            _unit.EffectExcecuted += OnEffectExecuted;
         }
         
-        public void Dispose()
+        public override void Dispose()
         {
             _unit.UnitAttributes[EAttributeType.Health].ValueChanged -= OnHealthChanged;
             _unit.UnitAttributes[EAttributeType.Block].ValueChanged -= OnBlockChanged;
@@ -41,6 +44,18 @@ namespace UI.Unit
         private void OnBlockChanged(float block)
         {
             View.SetBlock(block);
+        }
+        
+        private void OnEffectExecuted(EffectSettings effectSettings)
+        {
+            var info = $"";
+
+            foreach (var attributeModifier in effectSettings.AttributeModifiers)
+            {
+                info += attributeModifier.Attribute.ToString() + $"{attributeModifier.Value}\n";
+            }
+            
+            View.SetCurrentActionInfo(effectSettings.Description);
         }
     }
 }

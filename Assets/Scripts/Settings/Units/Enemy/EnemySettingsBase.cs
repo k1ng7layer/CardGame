@@ -9,7 +9,7 @@ namespace Settings.Units.Enemy
     {
         [SerializeField] private EnemySettings[] _enemySettings;
 
-        public UnitSettings Get(EnemyType enemyType)
+        public EnemySettings Get(EnemyType enemyType)
         {
             foreach (var enemySetting in _enemySettings)
             {

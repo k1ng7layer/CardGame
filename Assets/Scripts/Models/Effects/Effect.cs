@@ -1,4 +1,5 @@
-﻿using Helpers.Tasks;
+﻿using System;
+using Helpers.Tasks;
 using Models.Units;
 using Settings.Effects;
 
@@ -9,6 +10,8 @@ namespace Models.Effects
         protected readonly ICoroutineDispatcher CoroutineDispatcher;
         protected EffectSettings Settings { get; }
 
+        public event Action Completed;
+
         public Effect(
             EffectSettings settings, 
             ICoroutineDispatcher coroutineDispatcher
@@ -16,12 +19,17 @@ namespace Models.Effects
         {
             CoroutineDispatcher = coroutineDispatcher;
             Settings = settings;
-            ApplicationType = settings.ApplicationType;
+            ApplicationType = settings.ModifiersApplicationType;
         }
         
         public ApplicationType ApplicationType { get;}
 
         public virtual void Apply(BattleUnit user, BattleUnit target)
         { }
+
+        protected void Finish()
+        {
+            Completed?.Invoke();
+        }
     }
 }

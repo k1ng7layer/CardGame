@@ -115,8 +115,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4158213751671319993}
-  - component: {fileID: 8054713967731693427}
   - component: {fileID: 6576950010020533970}
+  - component: {fileID: 8054713967731693427}
   m_Layer: 6
   m_Name: EnemyType2
   m_TagString: Untagged
@@ -137,24 +137,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2644193268226526559}
   - {fileID: 3890851844989802624}
+  - {fileID: 8228388888139451939}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8054713967731693427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5172000781572589792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b09a1b0150584cb6af627601ddcae090, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 3994521033919613701}
-  _unitCanvas: {fileID: 5164909840485901997}
 --- !u!61 &6576950010020533970
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -200,6 +186,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.1636102, y: 2.6706266}
   m_EdgeRadius: 0
+--- !u!114 &8054713967731693427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5172000781572589792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b09a1b0150584cb6af627601ddcae090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 3994521033919613701}
+  _unitCanvas: {fileID: 2462530770603019444}
 --- !u!1001 &543309213973651306
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -301,13 +301,13 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50bfb7d7808d90842b985549cced74a7, type: 3}
---- !u!224 &2644193268226526559 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2537838989462180405, guid: 50bfb7d7808d90842b985549cced74a7, type: 3}
+--- !u!223 &2462530770603019444 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 2713016808031097822, guid: 50bfb7d7808d90842b985549cced74a7, type: 3}
   m_PrefabInstance: {fileID: 543309213973651306}
   m_PrefabAsset: {fileID: 0}
---- !u!223 &5164909840485901997 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 4622745986245884359, guid: 50bfb7d7808d90842b985549cced74a7, type: 3}
+--- !u!224 &8228388888139451939 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8483414734182961481, guid: 50bfb7d7808d90842b985549cced74a7, type: 3}
   m_PrefabInstance: {fileID: 543309213973651306}
   m_PrefabAsset: {fileID: 0}

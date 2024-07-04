@@ -14,6 +14,7 @@ namespace Models.Effects.Buffs
             ICoroutineDispatcher coroutineDispatcher) 
             : base(settings, coroutineDispatcher)
         {
+            _effectSettings = settings;
             _coroutineDispatcher = coroutineDispatcher;
         }
         
@@ -21,17 +22,29 @@ namespace Models.Effects.Buffs
         
         public override void Apply(BattleUnit user, BattleUnit target)
         {
-            Target = target;
-            
-            foreach (var attributeModifier in _effectSettings.AttributeModifiers)
-            {
-                if (!target.UnitAttributes.TryGetValue(attributeModifier.Attribute, out var attribute))
-                    continue;
-                
-                attribute.AddModifier(attributeModifier);
-            }
+            Target = user;
 
-            target.AddBuffEffect(this);
+            if (_effectSettings.ModifiersApplicationType == ApplicationType.Instant)
+            {
+                foreach (var attributeModifier in _effectSettings.AttributeModifiers)
+                {
+                    if (!Target.UnitAttributes.TryGetValue(attributeModifier.Attribute, out var attribute))
+                        continue;
+
+                    attribute.Value += attributeModifier.Value;
+                }
+            }
+            else
+            {
+                var buff = new Buff.Buff(
+                    _effectSettings.AttributeModifiers, 
+                    _effectSettings.ModifiersApplicationType,
+                    target);
+                
+                Target.AddBuffEffect(buff);
+            }
+            
+            Finish();
         }
         
         public virtual void Tick()

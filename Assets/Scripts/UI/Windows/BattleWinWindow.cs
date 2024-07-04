@@ -1,4 +1,5 @@
-﻿using UI.Core;
+﻿using UI.BattleWin;
+using UI.Core;
 
 namespace UI.Windows
 {
@@ -6,7 +7,7 @@ namespace UI.Windows
     {
         public override void Setup()
         {
-            
+            AddController<BattleWinController>();
         }
     }
 }

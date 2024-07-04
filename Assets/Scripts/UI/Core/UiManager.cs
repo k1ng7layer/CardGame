@@ -33,6 +33,14 @@ namespace UI.Core
         {
             Supyrb.Signals.Get<SignalOpenWindow>().RemoveListener(OpenNewWindow);
             Supyrb.Signals.Get<SignalCloseWindow>().RemoveListener(CloseLastWindow);
+
+            foreach (var controller in _controllers)
+            {
+                controller.Value.Dispose();
+            }
+            
+            _controllers.Clear();
+            _windows.Clear();
         }
 
         public void Initialize()

@@ -1,10 +1,12 @@
 ﻿using System;
+using Models.Cards;
 using Settings.Cards;
 using TMPro;
 using UI.Core;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Card = Models.Cards.Card;
 
 namespace UI.CardPanel
 {
@@ -20,36 +22,51 @@ namespace UI.CardPanel
         [SerializeField] private Color _onDragColor;
         
         private Color _normalColor;
+        private bool _interactable;
         
         public event Action<CardView> CardBeginDrag;
         public event Action<CardView> CardDragged;
         public event Action<CardView> CardEndDrag;
-        public CardSettings AttachedCardSettings { get; private set; }
+        public Card AttachedCard { get; private set; }
 
-        public void Initialize(CardSettings cardSettings)
+        public void Initialize(Card card)
         {
-            AttachedCardSettings = cardSettings;
-            _title.text = cardSettings.Title;
-            _description.text = cardSettings.Description;
-            _cost.text = $"{cardSettings.Cost}";
+            AttachedCard = card;
+            _title.text = card.Settings.Title;
+            _description.text = card.Settings.Description;
+            _cost.text = $"{card.Cost}";
             _normalColor = _bg.color;
         }
         
         public void OnDrag(PointerEventData eventData)
         {
+            if (!_interactable)
+                return;
+            
             CardDragged?.Invoke(this);
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            if (!_interactable)
+                return;
+            
             _bg.color = _onDragColor;
             CardBeginDrag?.Invoke(this);
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
+            if (!_interactable)
+                return;
+            
             _bg.color = _normalColor;
             CardEndDrag?.Invoke(this);
+        }
+
+        public void SetInteractable(bool value)
+        {
+            _interactable = value;
         }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Models.Cards;
 using Settings.Cards;
 using UI.Arrow;
 using UI.Core;
 using UnityEngine;
 using Views;
+using Object = UnityEngine.Object;
 
 namespace UI.CardPanel
 {
@@ -13,8 +15,9 @@ namespace UI.CardPanel
         [SerializeField] private CardView _cardViewPrefab;
         [SerializeField] private Transform _cardListRoot;
         [SerializeField] private BezierArrows _aimArrow;
-        [SerializeField] private List<CardView> _cardViews;
         [SerializeField] private LayerMask _layerMask;
+
+        private Dictionary<Card, CardView> _displayedCards = new();
         
         public event Action<CardView> CardBeginDrag;
         public event Action<CardView> CardDragged;
@@ -22,23 +25,50 @@ namespace UI.CardPanel
         public event Action<UnitView> PointerOnUnitEnter;
         public event Action<UnitView> PointerOnUnitExit;
 
-        public UnitView HoveredUnit { get; private set; }
         private bool _dragging;
+        
+        public UnitView HoveredUnit { get; private set; }
+        public Dictionary<Card, CardView> DisplayedCards { get; private set; } = new();
         
         public void SetCardUseAbility(bool value)
         {
             _aimArrow.CanUse(value);
         }
 
-        public void DisplayCard(CardSettings cardSettings)
+        public void DisplayCard(Card card, bool interactable)
         {
             var cardView = Instantiate(_cardViewPrefab, _cardListRoot);
-            cardView.Initialize(cardSettings);
+            cardView.Initialize(card);
             cardView.CardDragged += OnCardDrag;
             cardView.CardBeginDrag += OnCardBeginDrag;
             cardView.CardEndDrag += OnCardEndDrag;
+            cardView.SetInteractable(interactable);
             
-            _cardViews.Add(cardView);
+            DisplayedCards.Add(card, cardView);
+        }
+
+        public void DestroyCard(Card card)
+        {
+            var cardView = DisplayedCards[card];
+            cardView.CardDragged -= OnCardDrag;
+            cardView.CardBeginDrag -= OnCardBeginDrag;
+            cardView.CardEndDrag -= OnCardEndDrag;
+            DisplayedCards.Remove(card);
+            Destroy(cardView.gameObject);
+        }
+
+        public void DespawnCurrentCards()
+        {
+            foreach (var cardEntry in DisplayedCards)
+            {
+                cardEntry.Value.CardDragged -= OnCardDrag;
+                cardEntry.Value.CardBeginDrag -= OnCardBeginDrag;
+                cardEntry.Value.CardEndDrag -= OnCardEndDrag;
+                
+                Destroy(cardEntry.Value.gameObject);
+            }
+            
+            DisplayedCards.Clear();
         }
 
         public void EnableArrow(bool value)
@@ -86,12 +116,15 @@ namespace UI.CardPanel
 
         private void OnDestroy()
         {
-            foreach (var cardView in _cardViews)
+            foreach (var cardEntry in DisplayedCards)
             {
-                cardView.CardDragged -= OnCardDrag;
-                cardView.CardBeginDrag -= OnCardBeginDrag;
-                cardView.CardEndDrag -= OnCardEndDrag;
+                cardEntry.Value.CardDragged -= OnCardDrag;
+                cardEntry.Value.CardBeginDrag -= OnCardBeginDrag;
+                cardEntry.Value.CardEndDrag -= OnCardEndDrag;
+                
+                Destroy(cardEntry.Value.gameObject);
             }
+            
         }
     }
 }

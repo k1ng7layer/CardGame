@@ -29,5 +29,7 @@
         protected virtual void OnInitialize(){}
         protected virtual void OnShow(){}
         protected virtual void OnHide(){}
+        public virtual void Dispose()
+        { }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Settings.Battle;
 using Settings.Effects;
+using Settings.GameLevels;
 using Settings.Prefab;
 using Settings.Units.Enemy;
 using Settings.Units.Player;
@@ -16,6 +17,7 @@ namespace Settings
         [SerializeField] private PrefabBase _prefabBase;
         [SerializeField] private EnemySettingsBase _enemySettingsBase;
         [SerializeField] private PlayerSettings _playerSettings;
+        [SerializeField] private GameLevelsSettingsBase _levelsSettings;
 
         public BattleSettingsBase BattleSettingsBase => battleBattleSettingsBase;
 
@@ -26,5 +28,7 @@ namespace Settings
         public EnemySettingsBase EnemySettingsBase => _enemySettingsBase;
 
         public PlayerSettings PlayerSettings => _playerSettings;
+
+        public GameLevelsSettingsBase LevelsSettings => _levelsSettings;
     }
 }

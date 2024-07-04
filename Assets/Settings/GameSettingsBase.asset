@@ -17,3 +17,4 @@ MonoBehaviour:
   _prefabBase: {fileID: 11400000, guid: 6bb812e82685d2b46a739ea7a98899f6, type: 2}
   _enemySettingsBase: {fileID: 11400000, guid: f3767bb1af3e516429b0f83234b5aa84, type: 2}
   _playerSettings: {fileID: 11400000, guid: 7e1ff0a9fec241c4b85379e183b654fa, type: 2}
+  _levelsSettings: {fileID: 11400000, guid: 125191d6aebe7224e802a2f376e433f9, type: 2}

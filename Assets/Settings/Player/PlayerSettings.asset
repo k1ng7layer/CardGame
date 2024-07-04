@@ -19,7 +19,7 @@ MonoBehaviour:
     MinValue: 0
   - AttributeType: 2
     InitialValue: 4
-    MaxValue: 4
+    MaxValue: 10
     MinValue: 0
   - AttributeType: 0
     InitialValue: 1

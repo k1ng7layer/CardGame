@@ -14,14 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attributeParameters:
   - AttributeType: 1
-    InitialValue: 20
-    MaxValue: 20
+    InitialValue: 6
+    MaxValue: 6
     MinValue: 0
   - AttributeType: 0
     InitialValue: 0
     MaxValue: 2
     MinValue: 0
-  _name: 
+  _name: "\u0420\u0430\u0437\u0431\u043E\u0439\u043D\u0438\u043A \u0432 \u0440\u0432\u0430\u043D\u044C\u0435"
   enemyType: 1
   _effects:
-  - {fileID: 11400000, guid: 2b3bb0e173fcc674898117aaf3551b6a, type: 2}
+  - Chance: 0.3
+    EffectSettings: {fileID: 11400000, guid: 2b3bb0e173fcc674898117aaf3551b6a, type: 2}
+  - Chance: 0.6
+    EffectSettings: {fileID: 11400000, guid: 2ce07a08f64c47547a625bf7d56865ac, type: 2}
+  - Chance: 0.1
+    EffectSettings: {fileID: 11400000, guid: 9a882da24098812478d1b9cc9577708c, type: 2}

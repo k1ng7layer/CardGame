@@ -6,7 +6,6 @@ namespace Settings.Effects
     public class AttributeModifierSettings : ScriptableObject
     {
         public EAttributeType Attribute;
-        public OperationType OperationType;
         public int Value;
     }
 }

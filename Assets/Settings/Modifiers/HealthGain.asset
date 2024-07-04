@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42b3c20cdd40453f8104701c71dd8d7a, type: 3}
   m_Name: HealthGain
   m_EditorClassIdentifier: 
-  Effect: 1
-  OperationType: 0
-  Value: 2
+  Attribute: 1
+  Value: 5

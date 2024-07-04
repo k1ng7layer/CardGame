@@ -4,6 +4,5 @@
     {
         Attacking,
         Defensive,
-        PowerUp
     }
 }
